@@ -6,6 +6,8 @@ class CreateUsers < ActiveRecord::Migration[6.1]
       t.string :address
 
       t.timestamps
+
+      
     end
   end
 end

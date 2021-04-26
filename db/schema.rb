@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_23_071901) do
+ActiveRecord::Schema.define(version: 2021_04_26_125523) do
 
   create_table "carts", force: :cascade do |t|
     t.integer "product_id"
@@ -38,6 +38,14 @@ ActiveRecord::Schema.define(version: 2021_04_23_071901) do
     t.integer "user_id"
     t.index ["commentable_type", "commentable_id"], name: "index_comments_on_commentable"
     t.index ["user_id"], name: "index_comments_on_user_id"
+  end
+
+  create_table "cookings", force: :cascade do |t|
+    t.text "receipe"
+    t.string "title"
+    t.boolean "active"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "order_carts", force: :cascade do |t|
