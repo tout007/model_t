@@ -10,8 +10,7 @@
       </ul>
     </div>
   <% end %>
-  <!--% @products.each do |product| %-->
-
+  
   <div class="field">
     <%= form.label :name %>
     <%= form.text_field :name %>
@@ -19,7 +18,7 @@
 
   <div class="field">
     <%= form.label :price %>
-    <%= form.text_area :price %>
+    <%= form.text_field :price %>
   </div>
   
   <div class="field">
@@ -42,7 +41,12 @@
     <%= form.text_area :description %>
   </div>
 
-  <div class="actions">
+  <%= form.select(:category_id, Category.all.collect {|u| [u.name, u.id]}, :prompt => 'Select') %>
+
+  <%= form.select(:shopkeeper_id, Shopkeeper.all.collect {|u| [u.name, u.id]}, :prompt => 'Select') %>
+
+  <div class="actions" style="margin-top: 10px;">
     <%= form.submit %>
   </div>
 <% end %>
+

@@ -5,10 +5,12 @@ Rails.application.routes.draw do
 
   #root 'cookings#index'
 
-  root 'product#index'
+  root 'products#index'
 
   get "/products", to: "products#index"
-
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
-
+ 
+  resources :cookings, only: [:show, :edit, :update, :destroy]
+  
 end
+
+# For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.httpsml

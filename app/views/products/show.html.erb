@@ -30,5 +30,15 @@
   <%= @product.description %>
 </p>
 
-<%= link_to 'Edit', edit_cooking_path(@cooking) %> |
-<%= link_to 'Back', cookings_path %>
+<p>
+  <strong>ShopkeeperId:</strong>
+  <%= @product.shopkeeper_id %>
+</p>
+
+<p>
+  <strong>CategoriesId:</strong>
+  <%= @product.category_id %>
+</p>
+
+<%= link_to 'Edit', edit_product_path(@product) %> |
+<%= link_to 'Back', products_path %>

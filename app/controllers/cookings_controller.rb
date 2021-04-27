@@ -1,4 +1,5 @@
 class CookingsController < ApplicationController
+  
   before_action :set_cooking, only: %i[ show edit update destroy ]
 
   # GET /cookings or /cookings.json
