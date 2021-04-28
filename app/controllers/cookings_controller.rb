@@ -5,6 +5,7 @@ class CookingsController < ApplicationController
   # GET /cookings or /cookings.json
   def index
     @cookings = Cooking.all
+    # cookies[:current_cookings] = "ayushi"
   end
 
   # GET /cookings/1 or /cookings/1.json

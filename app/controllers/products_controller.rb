@@ -3,6 +3,7 @@ class ProductsController < ApplicationController
   before_action :set_product, only: %i[ show edit update destroy ]
 
   def index
+    binding.pry
     @products = Product.all
   end
 
@@ -22,12 +23,11 @@ class ProductsController < ApplicationController
 
   # POST /products or /products.json
   def create
-    # binding.pry
     @product = Product.new(product_params)
     if @product.save
       redirect_to @product,
       notice: "Product was successfully created"
-    else
+    else 
       render "new"
     end
   end
@@ -46,6 +46,8 @@ class ProductsController < ApplicationController
     @product = Product.find(params[:id])
     @product.destroy
 
+    #session.delete(:product_id)
+
     redirect_to root_path
   end
 
@@ -56,6 +58,9 @@ class ProductsController < ApplicationController
 
     def product_params
       params.require(:product).permit(:name, :price, :discount, :description, :quantity_in_stock, :brand, :category_id, :shopkeeper_id)
+
+      # it will update only name & price of product
+      params.fetch(:product, {}).permit(:name, :price)
     end
 
     def products_layout
