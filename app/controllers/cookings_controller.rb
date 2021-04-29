@@ -10,6 +10,13 @@ class CookingsController < ApplicationController
 
   # GET /cookings/1 or /cookings/1.json
   def show
+    # The user can request to receive this resource as HTML or PDF.
+    @cooking = Cooking.find(params[:id])
+    
+    respond_to do |format|
+      format.html
+      format.pdf {render pdf: generate_pdf(@cooking)}
+    end
   end
 
   # GET /cookings/new
@@ -58,6 +65,14 @@ class CookingsController < ApplicationController
     end
   end
 
+# Generates a PDF document with information on the client and returns it. The user will get the PDF as a file download.
+  def download_pdf
+    client = Cooking.find(params[:id])
+    send_data generate_pdf(cooking),
+              filename: "#{client.title}.pdf",
+              type: "application/pdf"
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_cooking
@@ -67,5 +82,14 @@ class CookingsController < ApplicationController
     # Only allow a list of trusted parameters through.
     def cooking_params
       params.require(:cooking).permit(:receipe, :title, :active)
+    end
+
+    def generate_pdf(cooking)
+      require "prawn"
+      Prawn::Document.new do
+        text cooking.title, align: :center
+        
+        text "Recipe: #{cooking.receipe}"
+      end.render
     end
 end

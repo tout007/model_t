@@ -3,16 +3,19 @@ class ApplicationController < ActionController::Base
   #layout inheritance 
   #layout "main"
 
-  # #find the product with id stored in session
-  # private 
-  #   def current_user
-  #     @product ||= session[:current_user_id] && Login.find_by(id: session[:current_user_id])
+  # before_action do |controller|
+  #   unless controller.send(@login)
+  #     flash[:error] = "You must be logged in to access this section"
+  #     redirect_to new_login_url
   #   end
+  # end
 
+  
   protect_from_forgery with: :exception   
   private   
-    def current_user   
+    def current_login   
       Login.where(id: session[:login_id]).first   
     end   
-    helper_method :current_user 
+  
+  helper_method :current_login 
 end

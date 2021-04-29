@@ -1,16 +1,16 @@
 Rails.application.routes.draw do
+  resources :sessions, only: [:new, :create, :destroy]  
+  
   # get 'sessions/new'
   # get 'sessions/create'
   # get 'sessions/destroy'
 
-  resources :sessions, only: [:new, :create, :destroy]  
   get 'signup', to: 'logins#new', as: 'signup'  
-  get 'login', to: 'sessions#new', as: 'login'  
+  post 'login', to: 'sessions#create', as: 'login'  
   get 'logout', to: 'sessions#destroy', as: 'logout'  
-  resources :users  
-
+   
   resources :logins
-  resources :cookingss
+  resources :cookings
   resources :products
 
   #root 'cookings#index'
@@ -19,10 +19,9 @@ Rails.application.routes.draw do
  
   resources :cookings, only: [:show, :edit, :update, :destroy]
   
-  get 'sessions/index'
-  # root 'login/index'
-  #root 'sessions#index'
-  
+  get 'logins', to: 'login#new' 
+  #get 'logins/index'
+  root 'logins#index' 
 
 end
 

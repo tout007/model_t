@@ -14,5 +14,21 @@
     <!-- <h1> header </h1> -->
     <%= yield %>
     <!-- <h1> footer </h1> -->
+
+    <div id="user_header">  
+      <% if current_login %>  
+        Logged in as <%= current_login.username %>.  
+        <%= link_to "Log Out", logout_path %>  
+     <% else %>  
+       <%= link_to "Sign Up", signup_path %> or  
+       <%= link_to "Log In", login_path %>  
+    <% end %>  
+  </div>  
+  <% flash.each do |key, value| %> 
+    <%= content_tag(:div, class: "alert alert-#{key}") do %>
+      <p><%= value %></p>  
+    <% end %>  
+  <% end %>  
+
   </body>
 </html>
